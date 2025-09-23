@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Inventory - KrishiMitra</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">KrishiMitra</a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+      </ul>
+      <div id="nav-actions"></div>
+    </div>
+  </nav>
+
+  <header id="hero">
+    <div class="container">
+      <h1>Inventory Management (Admin Only)</h1>
+
+      <form id="add-product-form">
+        <label for="productName">Product Name:</label><br />
+        <input type="text" id="productName" name="productName" placeholder="Enter product name" required /><br /><br />
+
+        <label for="basePrice">Base Price:</label><br />
+        <input type="number" id="basePrice" name="basePrice" placeholder="Enter base price" step="0.01" min="0" required /><br /><br />
+
+        <button type="submit" class="btn btn-primary">Add / Update Product</button>
+      </form>
+
+      <hr />
+
+      <h2>Existing Products</h2>
+      <ul id="product-list">
+        <!-- Existing products will be loaded here dynamically -->
+      </ul>
+    </div>
+  </header>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const token = localStorage.getItem('token');
+      const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+      // Redirect if user is not logged in as admin
+      if (!token || !isAdmin) {
+        window.location.href = 'admin-login.html';
+        return;
+      }
+
+      async function fetchProducts() {
+        const res = await fetch('https://krishimitra-be.onrender.com/api/products', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (res.ok) {
+          const products = await res.json();
+          const productList = document.getElementById('product-list');
+          productList.innerHTML = '';
+          products.forEach(product => {
+            const li = document.createElement('li');
+            li.textContent = `${product.name} - ₹${product.basePrice.toFixed(2)}`;
+            productList.appendChild(li);
+          });
+        } else {
+          alert('Failed to load products');
+        }
+      }
+
+      fetchProducts();
+
+      const form = document.getElementById('add-product-form');
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const name = form.productName.value.trim();
+        const basePrice = parseFloat(form.basePrice.value);
+
+        if (!name || basePrice <= 0) {
+          alert('Please enter a valid product name and base price.');
+          return;
+        }
+
+        const res = await fetch('https://krishimitra-be.onrender.com/api/products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({ name, basePrice })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert(data.message || 'Product added/updated successfully');
+          form.reset();
+          fetchProducts();
+        } else {
+          alert(data.message || 'Error adding product');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
