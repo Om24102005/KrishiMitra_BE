@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, enum: ['farmer', 'buyer', 'admin'], default: 'buyer' },
+  role: { type: String, enum: ['farmer', 'buyer'], default: 'buyer' },
   location: { type: String },
   date: { type: Date, default: Date.now },
   cart: [
@@ -21,6 +21,5 @@ const UserSchema = new mongoose.Schema({
       }
   ]
 });
-
 
 module.exports = mongoose.model('User', UserSchema);
