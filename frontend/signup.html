@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - KrishiMitra</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar scrolled">
+  <div class="navbar-content">
+    <a href="index.html" class="nav-logo">KrishiMitra 🌱</a>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="farmers.html" class="nav-link">Farmers</a>
+    <a href="buyers.html" class="nav-link">Buyers</a>
+    <a href="contact.html" class="nav-link">Advisory</a>
+    <a href="login.html" class="btn btn-secondary" id="login-btn">Login</a>
+    <a href="signup.html" class="btn btn-primary" id="signup-btn">Sign Up</a>
+    <a href="admin-login.html" class="btn btn-temp" id="admin-login-btn">Admin</a>
+    <a href="#" class="cart-icon" id="cart-icon"><i class="fas fa-shopping-cart"></i></a>
+  </div>
+</nav>
+
+    <header id="hero" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="char">J</span><span class="char">o</span><span class="char">i</span><span class="char">n</span>
+                <span class="char">K</span><span class="char">r</span><span class="char">i</span><span class="char">s</span><span class="char">h</span><span class="char">i</span><span class="char">M</span><span class="char">i</span><span class="char">t</span><span class="char">r</span><span class="char">a</span><span class="char">.</span>
+            </h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="500">Start your journey connecting with fresh, local produce and supporting your community farmers.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="signup" class="section">
+            <div class="container">
+                <div class="signup-container" data-aos="fade-up">
+                    <div class="signup-form-wrapper">
+                        <h2 class="section-title">Create Your Account</h2>
+                        <form id="main-signup-form" class="signup-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="role">I am a...</label>
+                                    <select id="role" name="role" required>
+                                        <option value="" disabled selected>Select your role</option>
+                                        <option value="buyer">Buyer</option>
+                                        <option value="farmer">Farmer</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    <input type="text" id="location" name="location" placeholder="Your city (e.g., Bhopal, MP)" required>
+                                </div>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-wrapper">
+                                    <input type="checkbox" id="terms" required>
+                                    I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>
+                                </label>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-wrapper">
+                                    <input type="checkbox" id="newsletter">
+                                    I would like to receive updates and news from KrishiMitra
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                        </form>
+                        <div class="auth-divider">
+                            <span>or</span>
+                        </div>
+                        <div class="auth-switch">
+                            <p>Already have an account? <a href="login.html" class="login-link">Sign in here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="signup-modal-overlay">
+        <div class="modal-container" id="login-modal">
+            <button class="close-modal-btn" id="close-login-modal">&times;</button>
+            <h2>Welcome Back</h2>
+            <form id="login-form">
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p class="auth-switch">Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+            </form>
+        </div>
+
+        <div class="modal-container" id="signup-modal" style="display: none;">
+            <button class="close-modal-btn" id="close-signup-modal">&times;</button>
+            <h2>Join KrishiMitra</h2>
+            <form id="signup-form">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <select name="role" required>
+                    <option value="" disabled selected>I am a...</option>
+                    <option value="buyer">Buyer</option>
+                    <option value="farmer">Farmer</option>
+                </select>
+                <input type="text" name="location" placeholder="Your City (e.g., Bhopal, MP)" required>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+                <p class="auth-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Smart Farmer Marketplace. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
